@@ -2,8 +2,8 @@ elasticsearch:
   image: elasticsearch:latest
   command: elasticsearch -Des.network.host=0.0.0.0
   ports:
-    - "9200:9200"
-    - "9300:9300"
+    - "9200"
+    - "9300"
 kibana:
   build: kibana/
   volumes:
