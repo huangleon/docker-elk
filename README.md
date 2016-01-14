@@ -2,8 +2,6 @@
 
 *docker-efk* is a Docker Compose service to help you store / query logging messages in your applications. All you have to do is to launch it with `docker-compose` and tell your docker containers to forward log messages to running fluend (by using `--log-driver=fluentd`). That's it
 
-Inspired from https://github.com/deviantony/docker-elk and I replace Logstash with [Fluentd](http://www.fluentd.org/)
-
 # How it works
 
 1. Look at Docker's [logging driver](https://docs.docker.com/engine/reference/logging/overview/) feature if you feel `docker logs` doesn't suit your need
