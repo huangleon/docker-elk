@@ -1,20 +1,23 @@
-elasticsearch:
+elasticsearch2:
   image: elasticsearch:latest
   command: elasticsearch -Des.network.host=0.0.0.0
   ports:
-    - "9200"
-    - "9300"
+    - "9201:9200"
+    - "9301:9300"
 kibana:
   build: kibana/
   volumes:
     - ./kibana/config/kibana.yml:/opt/kibana/config/kibana.yml
   ports:
-    - "5601:5601"
+    - "5602:5601"
   links:
-    - elasticsearch
+    - elasticsearch2
 fluentd:
   build: fluentd/
+  volumes:
+    - ./fluentd/fluent.conf:/fluentd/etc/fluent.conf        
   ports:
     - "24224:24224"
+    - "5140:5140/udp"
   links:
-    - elasticsearch
+    - elasticsearch2
