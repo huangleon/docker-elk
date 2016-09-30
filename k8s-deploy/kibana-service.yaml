@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging-kibana 
+  namespace: kube-system
+#  labels: 
+#    kubernetes.io/cluster-service: "true"
+#    kubernetes.io/name: "Grafana"
+spec:
+  # On production clusters, consider setting up auth for kibana, and
+  # exposing kibana either using a LoadBalancer or a public IP.
+  # type: LoadBalancer
+  type: NodePort
+  ports:
+    - nodePort: 30601
+      port: 5601
+      protocol: TCP
+      targetPort: ui
+  selector:
+    k8s-app: efk-logging
+
