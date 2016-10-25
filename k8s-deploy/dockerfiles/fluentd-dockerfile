@@ -1,0 +1,10 @@
+# https://github.com/fluent/fluentd-docker-image
+FROM fluent/fluentd:ubuntu-base
+MAINTAINER Duy Lam <duylamphuong@gmail.com>
+
+ENV http_proxy="http://16.216.235.20:8080" https_proxy="http://16.216.235.20:8080"
+# Allow fluentd to forward to elasticsearch
+RUN gem install --no-ri --no-rdoc fluent-plugin-elasticsearch
+ADD ./k8s-deploy/dockerfiles/fluentd/fluent.conf.template /fluentd/etc/fluent.conf.template
+
+ENV http_proxy="" https_proxy=""

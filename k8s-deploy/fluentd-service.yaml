@@ -7,6 +7,7 @@ metadata:
 #    kubernetes.io/cluster-service: "true"
 #    kubernetes.io/name: "Heapster"
 spec: 
+  type: NodePort
   ports: 
     - name: fluentd-tcp
       port: 24224
@@ -15,6 +16,7 @@ spec:
     - name: fluentd-udp
       port: 5140
       targetPort: 5140
+      nodePort: 30140
       protocol: UDP
   selector: 
     k8s-app: efk-logging 
