@@ -2,7 +2,13 @@
 FROM fluent/fluentd:ubuntu-base
 MAINTAINER Duy Lam <duylamphuong@gmail.com>
 
+USER root
+
 ENV http_proxy="http://16.216.235.20:8080" https_proxy="http://16.216.235.20:8080"
+
+RUN apt-get -y update \
+    && apt-get -y install gettext
+
 # Allow fluentd to forward to elasticsearch
 RUN gem install --no-ri --no-rdoc fluent-plugin-elasticsearch
 ADD ./k8s-deploy/dockerfiles/fluentd/fluent.conf.template /fluentd/etc/fluent.conf.template
