@@ -21,7 +21,7 @@ spec:
     spec:
 #      serviceAccountName: heapster
       containers:
-        - image: elasticsearch:latest
+        - image: elasticsearch:2.4
           name: elasticsearch
 #          resources:
 #            # keep request = limit to keep this container in guaranteed class
@@ -54,6 +54,8 @@ spec:
           - containerPort: 5601
             name: ui
             protocol: TCP
+          command: ["/bin/sh", "-c"]
+          args: ["MYVARS='$LOGGING_ELASTICSEARCH_SERVICE_HOST:$LOGGING_ELASTICSEARCH_SERVICE_PORT';envsubst \"$MYVARS\" < /opt/kibana/config/kibana.yml.template > /opt/kibana/config/kibana.yml;/tmp/entrypoint.sh"]
         - image: hleon256/fluentd:latest 
           name: fluentd
           ports:
@@ -85,5 +87,3 @@ spec:
 #        glusterfs:
 #          endpoints: glusterfs-efk
 #          path: elasticsearch
-
-
