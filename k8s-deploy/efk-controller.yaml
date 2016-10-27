@@ -20,6 +20,10 @@ spec:
         version: v1.0.0
     spec:
 #      serviceAccountName: heapster
+#
+#     set logging component running on specific node
+      nodeSelector:
+        kubernetes.io/hostname: c9t24960
       containers:
         - image: elasticsearch:2.4
           name: elasticsearch
